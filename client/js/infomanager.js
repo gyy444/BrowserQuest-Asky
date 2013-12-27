@@ -63,6 +63,10 @@ define(function() {
         "exp": {
             fill: "rgb(80, 80, 255)",
             stroke: "rgb(50, 50, 255)"
+        },
+        "levelup": {
+            fill: "rgb(255, 255, 0)",
+            stroke: "rgb(200, 200, 0)"
         }
     };
 

@@ -1,304 +1,230 @@
+define(['character', 'mob', 'skillhandler'], function(Character, Mob, SkillHandler) {
+  var Player = Character.extend({
+    init: function(id, name, kind, game) {
+      this._super(id, kind);
+       
+      this.name = name;
+      this.game = game;
 
-define(['character', 'exceptions'], function(Character, Exceptions) {
-
-    var Player = Character.extend({
-        MAX_LEVEL: 10,
-    
-        init: function(id, name, pw, kind) {
-            this._super(id, kind);
+      if(game){
+        this.skillHandler = new SkillHandler(game);
+      }
         
-            this.name = name;
-            this.pw = pw;
+      // Renderer
+      this.nameOffsetY = -10;
         
-            // Renderer
-     		this.nameOffsetY = -10;
-        
-            // sprites
-            this.spriteName = "clotharmor";
-            this.armorName = "clotharmor";
-            this.weaponName = "sword1";
+      // sprites
+      this.spriteName = "clotharmor";
+      this.armorName = "clotharmor";
+      this.weaponName = "sword1";
 
-            // Inventory
-            this.inventory = [];
-            this.inventoryCount = [];
-            this.healingCoolTimeCallback = null;
+      // modes
+      this.isLootMoving = false;
+      this.isSwitchingWeapon = true;
 
-            this.magicCoolTimeCallback = null;
-            this.healTargetName = null;
-        
-            // modes
-            this.isLootMoving = false;
-            this.isSwitchingWeapon = true;
+      // PVP Flag
+      this.pvpFlag = false;
 
-            // PVP Flag
-            this.pvpFlag = false;
+      // Benef
+      this.invincible = false;
+      this.isRoyalAzaleaBenef = false;
 
-            // Benef
-            this.invincible = false; // Fire Benef
-        },
-    
-        loot: function(item) {
-            if(item) {
-                var rank, currentRank, msg;
-            
-                if(item.type === "weapon") {
-                    rank = Types.getWeaponRank(item.kind);
-                    currentRank = Types.getWeaponRank(Types.getKindFromString(this.weaponName));
-                    msg = "You are wielding a better weapon";
+      this.isWanted = false;
 
-                    if(rank && currentRank) {
-                        if(rank === currentRank) {
-                            throw new Exceptions.LootException("You already have this "+item.type);
-                        } else if(rank <= currentRank) {
-                            throw new Exceptions.LootException(msg);
-                        }
-                    }
-                } else if(item.type === "armor"){
-                    if(this.level >= 100){
-                      this.putInventory(item.kind, 1);
-                    } else{
-                      rank = Types.getArmorRank(item.kind);
-                      currentRank = Types.getArmorRank(Types.getKindFromString(this.armorName));
-                      msg = "You are wielding a better armor";
+      this.healCooltimeCallback = null;
+      this.healCooltimeCounter = 0;
 
-                      if(rank && currentRank) {
-                        if(rank === currentRank) {
-                            throw new Exceptions.LootException("You already have this "+item.type);
-                        } else if(rank <= currentRank) {
-                            throw new Exceptions.LootException(msg);
-                        }
-                      }
-                    }
-                } else if(item.kind === Types.Entities.CAKE){
-                    this.putInventory(item.kind, 1);
-                } else if(Types.isHealingItem(item.kind)){
-                    this.putInventory(item.kind, item.count);
-                } else if(item.kind === Types.Entities.CD){
-                    this.putInventory(item.kind, 1);
-                }
-            
-                log.info('Player '+this.id+' has looted '+item.id);
-                if(Types.isArmor(item.kind) && this.invincible) {
-                    this.stopInvincibility();
-                }
-                item.onLoot(this);
-            }
-        },
-        putInventory: function(itemKind, count){
-            if(Types.isHealingItem(itemKind)){
-                if(this.inventory[0] === itemKind){
-                    this.inventoryCount[0] += count;
-                } else if(this.inventory[1] === itemKind){
-                    this.inventoryCount[1] += count;
-                } else{
-                    this._putInventory(itemKind, count);
-                }
-            } else{
-                this._putInventory(itemKind, count);
-            }
-        },
-        _putInventory: function(itemKind, count){
-            if(!this.inventory[0]){
-                this.inventory[0] = itemKind;
-                this.inventoryCount[0] = count;
-            } else if(!this.inventory[1]){
-                this.inventory[1] = itemKind;
-                this.inventoryCount[1] = count;
-            } else{
-                throw new Exceptions.LootException("인벤토리가 빈 공간이 없습니다.");
-            }
-        },
-        setInventory: function(itemKind, inventoryNumber, number){
-            this.inventory[inventoryNumber] = itemKind;
-            this.inventoryCount[inventoryNumber] = number;
-        },
-        makeEmptyInventory: function(inventoryNumber){
-            if(inventoryNumber === 0 || inventoryNumber === 1){
-                this.inventory[inventoryNumber] = null;
-            }
-        },
-        decInventory: function(inventoryNumber){
-            var self = this;
-
-            if(this.healingCoolTimeCallback === null){
-                this.healingCoolTimeCallback = setTimeout(function(){
-                    self.healingCoolTimeCallback = null;
-                }, 500);
-                this.inventoryCount[inventoryNumber] -= 1;
-                if(this.inventoryCount[inventoryNumber] <= 0){
-                    this.inventory[inventoryNumber] = null;
-                }
-                return true;
-            }
-            return false;
-        },
-        magicCoolTimeCheck: function(){
-          var self = this;
-          if(this.magicCoolTimeCallback === null){
-            this.magicCoolTimeCallback = setTimeout(function(){
-              self.magicCoolTimeCallback = null;
-            }, 10000000);
-            return true;
+      this.flareDanceCooltimeCallback = null;
+      this.flareDanceCooltimeCounter = 0;
+      this.flareDanceMsgCooltimeCounter = 0;
+    },
+    setSkill: function(level){
+      this.skillHandler.add('evasion', level);
+    },
+    setBloodSuckingSkill: function(level){
+      this.skillHandler.add('bloodSucking', level);
+    },
+    setCriticalStrikeSkill: function(level){
+      this.skillHandler.add('criticalStrike', level);
+    },
+    setHealSkill: function(level){
+      this.skillHandler.add('heal', level);
+    },
+    setFlareDanceSkill: function(level){
+      this.skillHandler.add('flareDance', level);
+    },
+    setStunSkill: function(level){
+      this.skillHandler.add('stun', level);
+    },
+    setSuperCatSkill: function(level){
+      this.skillHandler.add('superCat', level);
+    },
+    setProvocationSkill: function(level){
+      this.skillHandler.add('provocation', level);
+    },
+    flareDanceAttack: function(){
+      var adjacentMobIds = [];
+      var entity = null;
+      var x = this.gridX-1;
+      var y = this.gridY-1;
+      for(x = this.gridX-1; x < this.gridX+2; x++){
+        for(y = this.gridY-1; y < this.gridY+2; y++){
+          entity = this.game.getMobAt(x, y);
+          if(entity){
+            adjacentMobIds.push(entity.id);
           }
-          return false;
-        },
-    
-        /**
-         * Returns true if the character is currently walking towards an item in order to loot it.
-         */
-        isMovingToLoot: function() {
-            return this.isLootMoving;
-        },
-    
-        getSpriteName: function() {
-            return this.spriteName;
-        },
-    
-        setSpriteName: function(name) {
-            if(name){
-                this.spriteName = name;
-            }
-        },
-        
-        getArmorName: function() {
-            return this.armorName;
-        },
-        
-        getArmorSprite: function() {
-            return this.sprite;
-        },
-        setArmorName: function(name){
-            this.armorName = name;
-        },
-    
-        getWeaponName: function() {
-            return this.weaponName;
-        },
-    
-        setWeaponName: function(name) {
-            this.weaponName = name;
-        },
-    
-        hasWeapon: function() {
-            return this.weaponName !== null;
-        },
-        setBenef: function(itemKind){
-            if(itemKind === Types.Entities.FIREBENEF){
-                this.startInvincibility();
-            } else{
-                this.stopInvincibility();
-            }
-        },
-        equipFromInventory: function(type, inventoryNumber, sprites){
-            var itemString = Types.getKindAsString(this.inventory[inventoryNumber]);
-
-            if(itemString){
-                var itemSprite = sprites[itemString];
-                if(itemSprite){
-                    if(type === "armor"){
-                        this.inventory[inventoryNumber] = Types.getKindFromString(this.getArmorName());
-                        this.setSpriteName(itemString);
-                        this.setSprite(itemSprite);
-                        this.setArmorName(itemString);
-                    } else if(type === "avatar"){
-                        this.inventory[inventoryNumber] = null;
-                        this.setSpriteName(itemString);
-                        this.setSprite(itemSprite);
-                    }
-                }
-            }
-        },
-        switchArmor: function(armorName, sprite){
-            this.setSpriteName(armorName);
-            this.setSprite(sprite);
-            this.setArmorName(armorName);
-            if(this.switch_callback) {
-              this.switch_callback();
-            }
-        },
-    
-        switchWeapon: function(newWeaponName) {
-            var count = 14, 
-                value = false, 
-                self = this;
-        
-            var toggle = function() {
-                value = !value;
-                return value;
-            };
-        
-            if(newWeaponName !== this.getWeaponName()) {
-                if(this.isSwitchingWeapon) {
-                    clearInterval(blanking);
-                }
-            
-                this.switchingWeapon = true;
-                var blanking = setInterval(function() {
-                    if(toggle()) {
-                        self.setWeaponName(newWeaponName);
-                    } else {
-                        self.setWeaponName(null);
-                    }
-
-                    count -= 1;
-                    if(count === 1) {
-                        clearInterval(blanking);
-                        self.switchingWeapon = false;
-                    
-                        if(self.switch_callback) {
-                            self.switch_callback();
-                        }
-                    }
-                }, 90);
-            }
-        },
-        onArmorLoot: function(callback){
-            this.armorloot_callback = callback;
-        },
-    
-        onSwitchItem: function(callback) {
-            this.switch_callback = callback;
-        },
-        
-        onInvincible: function(callback) {
-            this.invincible_callback = callback;
-        },
-
-        startInvincibility: function() {
-            var self = this;
-        
-            if(!this.invincible) {
-                this.invincible = true;
-                if(this.invincible_callback){
-                    this.invincible_callback();      
-                }
-            } else {
-                // If the player already has invincibility, just reset its duration.
-                if(this.invincibleTimeout) {
-                    clearTimeout(this.invincibleTimeout);
-                }
-            }
-        
-            this.invincibleTimeout = setTimeout(function() {
-                self.stopInvincibility();
-                self.idle();
-            }, 15000);
-        },
-    
-        stopInvincibility: function() {
-            if(this.invincible_callback){
-                this.invincible_callback();      
-            }
-            this.invincible = false;
-        
-            if(this.invincibleTimeout) {
-                clearTimeout(this.invincibleTimeout);
-            }
-        },
-        flagPVP: function(pvpFlag){
-            this.pvpFlag = pvpFlag;
         }
-    });
+      }
+      if(adjacentMobIds.length > 0){
+        var i = 4;
+        for(i = adjacentMobIds.length; i < 4; i++){
+          adjacentMobIds.push(0);
+        }
+        if(adjacentMobIds.length > 4){
+          adjacentMobIds = adjacentMobIds.slice(0,4);
+        }
+        this.game.client.sendFlareDance(adjacentMobIds);
+      }
+    },
 
-    return Player;
+    isMovingToLoot: function() {
+      return this.isLootMoving;
+    },
+    getSpriteName: function() {
+      return this.spriteName;
+    },
+    setSpriteName: function(name) {
+      if(name){
+        this.spriteName = name;
+      } else{
+        this.spriteName = this.armorName;
+      }
+    },
+    getArmorName: function() {
+      return this.armorName;
+    },
+    getArmorSprite: function() {
+      return this.sprite;
+    },
+    setArmorName: function(name){
+      this.armorName = name;
+    },
+    getWeaponName: function() {
+      return this.weaponName;
+    },
+    setWeaponName: function(name) {
+      this.weaponName = name;
+    },
+    hasWeapon: function() {
+      return this.weaponName !== null;
+    },
+    setBenef: function(itemKind){
+      switch(itemKind){
+        case Types.Entities.FIREBENEF:
+          this.startInvincibility();
+          break;
+        case Types.Entities.ROYALAZALEABENEF:
+          this.startRoyalAzaleaBenef();
+          break;
+        case Types.Entities.DEBENEF:
+          this.stopInvincibility();
+          break;
+      }
+    },
+    switchArmor: function(armorName, sprite){
+      this.setSpriteName(armorName);
+      this.setSprite(sprite);
+      this.setArmorName(armorName);
+      if(this.switch_callback) {
+        this.switch_callback();
+      }
+    },
+    switchWeapon: function(newWeaponName) {
+      var count = 14, 
+          value = false, 
+          self = this;
+        
+      var toggle = function() {
+          value = !value;
+          return value;
+      };
+        
+      if(newWeaponName !== this.getWeaponName()) {
+        if(this.isSwitchingWeapon) {
+          clearInterval(blanking);
+        }
+            
+        this.switchingWeapon = true;
+        var blanking = setInterval(function() {
+          if(toggle()) {
+            self.setWeaponName(newWeaponName);
+          } else {
+            self.setWeaponName(null);
+          }
+
+          count -= 1;
+          if(count === 1) {
+            clearInterval(blanking);
+            self.switchingWeapon = false;
+                    
+            if(self.switch_callback) {
+              self.switch_callback();
+            }
+          }
+        }, 90);
+      }
+    },
+    onArmorLoot: function(callback){
+      this.armorloot_callback = callback;
+    },
+    startInvincibility: function() {
+      var self = this;
+        
+      if(!this.invincible) {
+        this.invincible = true;
+      } else {
+        if(this.invincibleTimeout) {
+          clearTimeout(this.invincibleTimeout);
+        }
+      }
+      this.invincibleTimeout = setTimeout(function() {
+        self.stopInvincibility();
+        self.idle();
+      }, 15000);
+    },
+    stopInvincibility: function() {
+      this.invincible = false;
+        
+      if(this.invincibleTimeout) {
+        clearTimeout(this.invincibleTimeout);
+      }
+    },
+    startRoyalAzaleaBenef: function() {
+      var self = this;
+        
+      if(!this.isRoyalAzaleaBenef) {
+        this.isRoyalAzaleaBenef = true;
+      } else {
+        if(this.royalAzaleaBenefTimeout) {
+          clearTimeout(this.royalAzaleaBenefTimeout);
+        }
+      }
+      this.royalAzaleaBenefTimeout = setTimeout(function() {
+        self.stopRoyalAzaleaBenef();
+        self.idle();
+      }, 15000);
+    },
+    stopRoyalAzaleaBenef: function(){
+      this.isRoyalAzaleaBenef = false;
+        
+      if(this.royalAzaleaBenefTimeout) {
+        clearTimeout(this.royalAzaleaBenefTimeout);
+      }
+    },
+    flagPVP: function(pvpFlag){
+      this.pvpFlag = pvpFlag;
+    },
+  });
+
+  return Player;
 });

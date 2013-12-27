@@ -4,11 +4,11 @@
 	"height": 64,
 	"animations": {
 		"atk_right": {
-			"length": 6,
+			"length": 5,
 			"row": 0
 		},
 		"walk_right": {
-			"length": 3,
+			"length": 4,
 			"row": 1
 		},
 		"idle_right": {
@@ -28,7 +28,7 @@
 			"row": 5
 		},
 		"atk_down": {
-			"length": 6,
+			"length": 5,
 			"row": 6
 		},
 		"walk_down": {

@@ -10,9 +10,7 @@ define(['jquery', 'area'], function($, Area) {
         	this.mapLoaded = false;
         	this.loadMultiTilesheets = loadMultiTilesheets;
         	
-        	var useWorker = !(this.game.renderer.mobile || this.game.renderer.tablet);
-
-        	this._loadMap(useWorker);
+        	this._loadMap();
         	this._initTilesets();
         },
         
@@ -25,37 +23,22 @@ define(['jquery', 'area'], function($, Area) {
         	}
         },
 
-        _loadMap: function(useWorker) {
+        _loadMap: function() {
         	var self = this,
         	    filepath = "maps/world_client.json";
         	
-        	if(useWorker) {
-        	    log.info("Loading map with web worker.");
-                var worker = new Worker('js/mapworker.js');
-                worker.postMessage(1);
-            
-                worker.onmessage = function(event) {
-                    var map = event.data;
-                    self._initMap(map);
-                    self.grid = map.grid;
-                    self.plateauGrid = map.plateauGrid;
-                    self.mapLoaded = true;
-                    self._checkReady();
-                };
-            } else {
-                log.info("Loading map via Ajax.");
-                $.get(filepath, function (data) {
-                    self._initMap(data);
-                    self._generateCollisionGrid();
-                    self._generatePlateauGrid();
-                    self.mapLoaded = true;
-                    self._checkReady();
-                }, 'json');
-            }        
+            log.info("Loading map via Ajax.");
+            $.get(filepath, function (data) {
+                self._initMap(data);
+                self._generateCollisionGrid();
+                self._generatePlateauGrid();
+                self.mapLoaded = true;
+                self._checkReady();
+            }, 'json');
         },
         
         _initTilesets: function() {
-            var tileset1, tileset2, tileset3;
+            var tileset1, tileset2;
             
             if(!this.loadMultiTilesheets) {
                 this.tilesetCount = 1;
@@ -65,13 +48,12 @@ define(['jquery', 'area'], function($, Area) {
                     this.tilesetCount = 1;
                     tileset2 = this._loadTileset('img/2/tilesheet.png');
                 } else {
-                    this.tilesetCount = 2;
+                    this.tilesetCount = 1;
                     tileset2 = this._loadTileset('img/2/tilesheet.png');
-                    tileset3 = this._loadTileset('img/3/tilesheet.png');
                 }
             }
         
-            this.tilesets = [tileset1, tileset2, tileset3];
+            this.tilesets = [tileset1, tileset2];
         },
 
         _initMap: function(map) {

@@ -712,6 +712,433 @@ define(['mob', 'timer'], function(Mob, Timer) {
                 this.aggroRange = 3;
             }
         }),
+        Shadowregion: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SHADOWREGION);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Lightningguardian: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.LIGHTNINGGUARDIAN);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Enel: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.ENEL);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Minidragon: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.MINIDRAGON);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Miniseadragon: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.MINISEADRAGON);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Miniemperor: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.MINIEMPEROR);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Slime: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SLIME);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Kaonashi: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.KAONASHI);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Windguardian: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.WINDGUARDIAN);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Squid: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SQUID);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Rhaphidophoridae: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.RHAPHIDOPHORIDAE);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Bee: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BEE);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Ant: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.ANT);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Rudolf: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.RUDOLF);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Santaelf: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SANTAELF);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Santa: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SANTA);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Soldierant: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SOLDIERANT);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Redcockroach: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.REDCOCKROACH);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Bluecockroach: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BLUECOCKROACH);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Soybeanbug: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SOYBEANBUG);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Earthworm: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.EARTHWORM);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Cat: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.CAT);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Firespider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.FIRESPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+            }
+        }),
+        Snowman: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SNOWMAN);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(750);
+            }
+        }),
+        Queenant: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.QUEENANT);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(700);
+            }
+        }),
+        Beetle: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BEETLE);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(665);
+            }
+        }),
+        Hongcheol: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.HONGCHEOL);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(632);
+            }
+        }),
+        Blazespider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BLAZESPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(600);
+            }
+        }),
+        Whitetiger: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.WHITETIGER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(594);
+            }
+        }),
+        Blackwizard: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BLACKWIZARD);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(589);
+            }
+        }),
+        Smalldevil: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SMALLDEVIL);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(584);
+            }
+        }),
+        Pierrot: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.PIERROT);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(579);
+            }
+        }),
+        Mantis: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.MANTIS);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(574);
+            }
+        }),
+        Poisonspider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.POISONSPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(569);
+            }
+        }),
+        Babyspider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.BABYSPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(800);
+            }
+        }),
+        Queenspider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.QUEENSPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(565);
+            }
+        }),
+        Skydinosaur: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SKYDINOSAUR);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(800);
+            }
+        }),
+        Cactus: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.CACTUS);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(565);
+            }
+        }),
+        Devilkazya: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.DEVILKAZYA);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(560);
+            }
+        }),
+        Cursedjangseung: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.CURSEDJANGSEUNG);
+                this.moveSpeed = 200;
+                this.atkSpeed = 100;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(555);
+            }
+        }),
+        Suicideghost: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.SUICIDEGHOST);
+                this.moveSpeed = 200;
+                this.atkSpeed = 70;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(550);
+            }
+        }),
+        Hellspider: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.HELLSPIDER);
+                this.moveSpeed = 200;
+                this.atkSpeed = 70;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(550);
+            }
+        }),
+        Frog: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.FROG);
+                this.moveSpeed = 200;
+                this.atkSpeed = 70;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(550);
+            }
+        }),
+        Cursedhahoemask: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.CURSEDHAHOEMASK);
+                this.moveSpeed = 200;
+                this.atkSpeed = 70;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(550);
+            }
+        }),
+        Jirisanmoonbear: Mob.extend({
+            init: function(id) {
+                this._super(id, Types.Entities.JIRISANMOONBEAR);
+                this.moveSpeed = 200;
+                this.atkSpeed = 70;
+                this.idleSpeed = 150;
+                this.aggroRange = 3;
+                this.setAttackRate(550);
+            }
+        }),
     };
 
     return Mobs;

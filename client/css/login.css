@@ -1,0 +1,88 @@
+#loginscreen {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 960px;
+  height: 448px;
+  padding: 0px 0px;
+  border: 0px;
+  margin: 0px;
+  background-image: url('../img/2/login.jpg' );
+}
+#loginscreen input {
+  width: 125px;
+  height: 16px;
+  background: rgba(0,0,0,0);
+  font-family: sans-serif;
+  font-size: 12px;
+  color: #000000;
+  text-shadow: 0px -1px 0px #334f71; 
+  text-align: center;
+  border: 0px;
+}
+#loginscreen input:focus {
+  background: #EEEEEE;
+}
+#loginnameinput{
+  position: absolute;
+  top: 220px;
+  left: 415px;
+}
+#loginpwinput{
+  position: absolute;
+  top: 290px;
+  left: 415px;
+}
+#joinnameinput{
+  position: absolute;
+  top: 175px;
+  left: 425px;
+}
+#joinpwinput{
+  position: absolute;
+  top: 215px;
+  left: 425px;
+}
+#joinpwinput2{
+  position: absolute;
+  top: 255px;
+  left: 425px;
+}
+#emailinput{
+  position: absolute;
+  top: 295px;
+  left: 425px;
+}
+#loginbutton, #pagetonewcharacterbutton, #communitybutton, #joinbutton{
+  position: absolute;
+  width: 250px;
+  height: 40px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+#loginbutton{
+  top: 385px;
+  left: 325px;
+}
+#pagetonewcharacterbutton{
+  top: 320px;
+  left: 635px;
+}
+#communitybutton{
+  top: 380px;
+  left: 635px;
+}
+#joinbutton{
+  top: 340px;
+  left: 430px;
+}
+#loginpage {
+}
+#joinpage {
+  display: none;
+}
+#languageselection{
+  position: absolute;
+  top: 200px;
+  left: 635px;
+}

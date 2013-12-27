@@ -1,0 +1,232 @@
+#storeDialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -306px;
+  margin-top: -213px;
+  font-family: 'GraphicPixel';
+  font-size: 9pt;
+  font-weight: bold;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  display: none;
+}
+
+#storeDialogInventory {
+  position: absolute;
+  left: 0px;
+  top: 44px;
+  width: 258px;
+  height: 310px;
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: 0px 0px;
+}
+
+#storeDialogStore {
+  position: absolute;
+  left: 258px;
+  top: 0px;
+  width: 342px;
+  height: 380px;
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -258px 0px;
+}
+
+#storeDialogStorePotionPage, #storeDialogStoreArmorPage, #storeDialogStoreWeaponPage {
+  position: absolute;
+  left: 0px;
+  top: 52px;
+  width: 342px;
+  height: 330px;
+  display: none;
+}
+#storeDialogStorePotionPageBody, #storeDialogStoreArmorPageBody, #storeDialogStoreWeaponPageBody {
+  position: absolute;
+  left: 38px;
+  top: 34px;
+  width: 268px;
+  height: 240px;
+}
+
+#storeDialogStoreButtons {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 342px;
+  height: 52px;
+}
+#storeDialogStorePotionButton, #storeDialogStoreArmorButton, #storeDialogStoreWeaponButton {
+  position: absolute;
+  top: 0px;
+  width: 98px;
+  height: 52px;
+}
+#storeDialogStorePotionButton {
+  left: 8px;
+}
+#storeDialogStorePotionButton.active {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -600px -188px;
+}
+#storeDialogStoreArmorButton {
+  left: 110px;
+}
+#storeDialogStoreArmorButton.active {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -600px -292px;
+}
+#storeDialogStoreWeaponButton {
+  left: 212px;
+}
+#storeDialogStoreWeaponButton.active {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -600px -240px;
+}
+
+#storeDialogPageNavigator {
+  display: none;
+}
+
+#storeDialogPageNavigatorMovePreviousButton {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -16px -332px;
+}
+#storeDialogPageNavigatorMovePreviousButton.enabled {
+  background-position: -48px -332px;
+  cursor: pointer;
+}
+#storeDialogPageNavigatorMoveNextButton {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: 0px -332px;
+}
+#storeDialogPageNavigatorMoveNextButton.enabled {
+  background-position: -32px -332px;
+  cursor: pointer;
+}
+
+.storeDialogPageNavigatorNumber0 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: 0px -310px;
+}
+.storeDialogPageNavigatorNumber1 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -18px -310px;
+}
+.storeDialogPageNavigatorNumber2 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -36px -310px;
+}
+.storeDialogPageNavigatorNumber3 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -54px -310px;
+}
+.storeDialogPageNavigatorNumber4 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -72px -310px;
+}
+.storeDialogPageNavigatorNumber5 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -90px -310px;
+}
+.storeDialogPageNavigatorNumber6 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -108px -310px;
+}
+.storeDialogPageNavigatorNumber7 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -126px -310px;
+}
+.storeDialogPageNavigatorNumber8 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -144px -310px;
+}
+.storeDialogPageNavigatorNumber9 {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -162px -310px;
+}
+.storeDialogPageNavigatorNumberS {
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -180px -310px;
+}
+
+#storeDialogModal {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  font-family: 'GraphicPixel';
+  font-size: 9pt;
+  font-weight: bold;
+  background-color: rgba(100, 100, 100, 0.3);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  display: none;
+}
+#storeDialogModalNotify {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 334px;
+  height: 94px;
+  margin-left: -167px;
+  margin-top: -47px;
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -600px -94px;
+  display: none;
+}
+#storeDialogModalNotifyMessage {
+  position: absolute;
+  left: 67px;
+  top: 28px;
+  width: 247px;
+  height: 33px;
+  line-height: 33px;
+}
+#storeDialogModalNotifyButton1 {
+  position: absolute;
+  left: 286px;
+  top: 68px;
+  width: 28px;
+  height: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+#storeDialogModalConfirm {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 334px;
+  height: 94px;
+  margin-left: -167px;
+  margin-top: -47px;
+  background-image: url('../img/2/storedialogsheet.png');
+  background-position: -600px 0px;
+  display: none;
+}
+#storeDialogModalConfirmMessage {
+  position: absolute;
+  left: 67px;
+  top: 28px;
+  width: 247px;
+  height: 33px;
+  line-height: 33px;
+}
+#storeDialogModalConfirmButton1 {
+  position: absolute;
+  left: 254px;
+  top: 68px;
+  width: 28px;
+  height: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+#storeDialogModalConfirmButton2 {
+  position: absolute;
+  left: 286px;
+  top: 68px;
+  width: 28px;
+  height: 14px;
+  text-align: center;
+  cursor: pointer;
+}

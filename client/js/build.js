@@ -1,35 +1,23 @@
 ({
-    appDir: "../",
-    baseUrl: "js/",
-    dir: "../../client-build",
-    optimize: "uglify",
-    optimizeCss: "standard.keepLines",
-    
-    paths: {
-        "jquery": "lib/require-jquery"
-    },
+  appDir: "../",
+  baseUrl: "js/",
+  dir: "../../client-build",
+  optimize: "closure",
+  optimizeCss: "standard.keepLines",
 
-    modules: [
-        //Optimize the require-jquery.js file by applying any minification
-        //that is desired via the optimize: setting above.
-        {
-            name: "jquery"
-        },
-        
-        {
-            name: "game",
-            exclude: ["jquery"]
-        },
-         
-        {
-            name: "home",
-            // Exclude the jquery module since it is included already in require-jquery.js
-            exclude: ["jquery", "game"]
-        }
-    ],
-    
-    pragmas: {
-        devHost: false,
-        prodHost: true
-    }
+  paths: {
+    "jquery": "lib/require-jquery"
+  },
+
+  uglify: {
+     no_mangle: false,
+  },
+
+  closure: {
+    CompilerOptions: {},
+    CompilationLevel: 'ADVANCED_OPTIMIZATIONS',
+    logginLevel: 'WARNING'
+  },
+  name: "main",
+  out: "main-built.js"
 })

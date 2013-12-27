@@ -4,7 +4,6 @@ define(['jquery'], function(){
       this.client = null;
       this.curNum = 0;
       this.curViewHtml = null;
-      this.adsenseBackup = $('#board').html();
       $('#board').empty();
     },
     setClient: function(client){
@@ -15,7 +14,7 @@ define(['jquery'], function(){
     },
     show: function(){
       $('#board').css('display', 'block');
-      this.client.sendBoard('list', 0, 0);
+      this.client.sendBoard('list', 0, '0');
     },
     view: function(data, level){
       this.curReplyNum = 1;
@@ -33,7 +32,7 @@ define(['jquery'], function(){
                    + ' 조회수: ' + counter
                    + ' 추천/반대: ' + up + '/' + down
                    + ' 글 쓴 시간: ' + timeString + '</td></tr>'
-                   + '<tr><td>' + content + '</td></tr>';
+                   + '<tr><td>' + this.parseContent(content) + '</td></tr>';
 
       this.curViewHtml = viewHtml;
 
@@ -51,15 +50,14 @@ define(['jquery'], function(){
       viewHtml += '<p></p><p></p>';
 
       $('#board').empty();
-      $('#board').html(this.adsenseBackup);
-      $('#adsense').before(viewHtml);
+      $('#board').html(viewHtml);
 
       var self = this;
       $('#up').click(function(event){
-        self.client.sendBoard('up', self.curNum, 0);
+        self.client.sendBoard('up', self.curNum, '0');
       });
       $('#down').click(function(event){
-        self.client.sendBoard('down', self.curNum, 0);
+        self.client.sendBoard('down', self.curNum, '0');
       });
       $('#write').click(function(event){
         var reply = $('#reply').attr('value');
@@ -95,8 +93,43 @@ define(['jquery'], function(){
         }
       });
       $('#viewreply').click(function(event){
-        self.client.sendBoard('reply', self.curNum, self.curReplyNum);
+        self.client.sendBoard('reply', self.curNum, self.curReplyNum.toString());
       });
+      $('#voteButton').click(function(event){
+        var voteElement = $('input:radio[name=voteElement]:checked').val();
+        if(voteElement){
+          self.client.sendBoard('vote', self.curNum, voteElement);
+        } else{
+          alert("투표할 항목을 선택하셔야 합니다.");
+        }
+      });
+      $('#voteResultButton').click(function(event){
+        self.client.sendBoard('voteResult', self.curNum, '1');
+      });
+    },
+    parseContent: function(content){
+      var startPos = -1;
+      var endPos = 0;
+      var replacingStr = null;
+      var voteId = null;
+      var i = 1;
+
+      while(true){
+        startPos = content.indexOf("[vote(", startPos+1);
+        endPos = content.indexOf(")]");
+        if(startPos === -1 || endPos === -1){
+          break;
+        }
+        replacingStr = content.substring(startPos, endPos+2);
+        voteId = content.substring(startPos+6, endPos);
+        content = content.replace(replacingStr, '<input type="radio" name="voteElement" value="' + voteId + '">' + i + '. ' + voteId + '</input><br>');
+        i++;
+      }
+
+      content = content.replace('[vote button]', '<br><div id="voteButton">투표 하기</div><br>');
+      content = content.replace('[vote result button]', '<div id="voteResultButton">투표 결과 보기</div>');
+
+      return content;
     },
     viewReply: function(data, level){
       var i = 2;
@@ -123,8 +156,7 @@ define(['jquery'], function(){
       viewHtml += '<p></p><p></p>';
 
       $('#board').empty();
-      $('#board').html(this.adsenseBackup);
-      $('#adsense').before(viewHtml);
+      $('#board').html(viewHtml);
 
       var self = this;
       $('#write').click(function(event){
@@ -161,7 +193,7 @@ define(['jquery'], function(){
         }
       });
       $('#viewreply').click(function(event){
-        self.client.sendBoard('reply', self.curNum, self.curReplyNum);
+        self.client.sendBoard('reply', self.curNum, self.curReplyNum.toString());
       });
     },
     list: function(data, level){
@@ -212,48 +244,47 @@ define(['jquery'], function(){
       viewHtml += '<p>※ 게시판 기능은 아직 만드는 중입니다.</p>';
 
       $('#board').empty();
-      $('#board').html(this.adsenseBackup);
-      $('#adsense').before(viewHtml);
+      $('#board').html(viewHtml);
 
       var self = this;
       $('#boardlist1').click(function(event){
-        self.client.sendBoard('view', lastnum, 0);
+        self.client.sendBoard('view', lastnum, '0');
         self.curNum = lastnum;
       });
       $('#boardlist2').click(function(event){
-        self.client.sendBoard('view', lastnum - 1, 0);
+        self.client.sendBoard('view', lastnum - 1, '0');
         self.curNum = lastnum - 1;
       });
       $('#boardlist3').click(function(event){
-        self.client.sendBoard('view', lastnum - 2, 0);
+        self.client.sendBoard('view', lastnum - 2, '0');
         self.curNum = lastnum - 2;
       });
       $('#boardlist4').click(function(event){
-        self.client.sendBoard('view', lastnum - 3, 0);
+        self.client.sendBoard('view', lastnum - 3, '0');
         self.curNum = lastnum - 3;
       });
       $('#boardlist5').click(function(event){
-        self.client.sendBoard('view', lastnum - 4, 0);
+        self.client.sendBoard('view', lastnum - 4, '0');
         self.curNum = lastnum - 4;
       });
       $('#boardlist6').click(function(event){
-        self.client.sendBoard('view', lastnum - 5, 0);
+        self.client.sendBoard('view', lastnum - 5, '0');
         self.curNum = lastnum - 5;
       });
       $('#boardlist7').click(function(event){
-        self.client.sendBoard('view', lastnum - 6, 0);
+        self.client.sendBoard('view', lastnum - 6, '0');
         self.curNum = lastnum - 6;
       });
       $('#boardlist8').click(function(event){
-        self.client.sendBoard('view', lastnum - 7, 0);
+        self.client.sendBoard('view', lastnum - 7, '0');
         self.curNum = lastnum - 7;
       });
       $('#boardlist9').click(function(event){
-        self.client.sendBoard('view', lastnum - 8, 0);
+        self.client.sendBoard('view', lastnum - 8, '0');
         self.curNum = lastnum - 8;
       });
       $('#boardlist10').click(function(event){
-        self.client.sendBoard('view', lastnum - 9, 0);
+        self.client.sendBoard('view', lastnum - 9, '0');
         self.curNum = lastnum - 9;
       });
       $('#write').click(function(event){
@@ -261,7 +292,7 @@ define(['jquery'], function(){
       });
       $('#nextpage').click(function(event){
         self.curNum = lastnum - 10;
-        self.client.sendBoard('list', self.curNum, 0);
+        self.client.sendBoard('list', self.curNum, '0');
       });
     },
     write: function(){
@@ -272,8 +303,7 @@ define(['jquery'], function(){
       viewHtml += '<p></p><p></p>';
 
       $('#board').empty();
-      $('#board').html(this.adsenseBackup);
-      $('#adsense').before(viewHtml);
+      $('#board').html(viewHtml);
 
       var self = this;
       $('#write').click(function(event){

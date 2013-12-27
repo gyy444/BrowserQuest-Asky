@@ -1,0 +1,25 @@
+Add mob & item
+shared/js/gametypes.js 2,3
+client/js/entityfactory.js
+client/js/game.js
+client/js/sprites.js
+client/sprites
+
+Add mob
+client/js/mobs.js
+server/js/properties.js
+
+Add item
+client/js/items.js
+
+Add benef
+client/js/game.js
+client/js/sprites.js
+client/sprites
+
+Add quest
+shared/js/gametypes.js TOTAL_QUEST_NUMBER
+client/js/questhandler.js init, initSkill
+//client/js/gameclient.js receiveWelcome
+//server/js/databasehandler.js loadQuest
+//server/js/player.js sendWelcome
